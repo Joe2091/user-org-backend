@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using UserOrg.Domain.Entities;
 
-namespace UserOrg.Application.Interfaces;
+namespace UserOrg.BusinessLogic.Interfaces;
 
 public interface IUserRepository
 {

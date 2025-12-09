@@ -1,7 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using UserOrg.Application.Interfaces;
+using MediatR;
 using UserOrg.Infrastructure.Persistence;
 using UserOrg.Infrastructure.Repositories;
+using UserOrg.BusinessLogic.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddMediatR(typeof(IUserRepository).Assembly);
 
 // DbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

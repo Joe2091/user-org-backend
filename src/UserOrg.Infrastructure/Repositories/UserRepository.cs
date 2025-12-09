@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UserOrg.Application.Interfaces;
+using UserOrg.BusinessLogic.Interfaces;
 using UserOrg.Domain.Entities;
 using UserOrg.Infrastructure.Persistence;
 
