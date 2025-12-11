@@ -1,7 +1,9 @@
 ﻿using MediatR;
 using UserOrg.BusinessLogic.Interfaces;
+using UserOrg.BusinessLogic.Users.Builders;
 using UserOrg.BusinessLogic.Users.Commands;
 using UserOrg.BusinessLogic.Users.Dtos;
+using UserOrg.BusinessLogic.Users.Mappers;
 using UserOrg.Domain.Entities;
 
 namespace UserOrg.BusinessLogic.Users.Handlers;
@@ -17,26 +19,15 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserD
 
     public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var user = new User
-        {
-            FirstName = request.FirstName,
-            LastName = request.LastName,
-            Email = request.Email,
-            Role = request.Role,
-            ManagerId = request.ManagerId,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
-        };
+        var user = new UserBuilder()
+            .WithName(request.FirstName, request.LastName)
+            .WithEmail(request.Email)
+            .WithRole(request.Role)
+            .WithManagerId(request.ManagerId)
+            .Build();
 
         await _userRepository.AddAsync(user);
 
-        return new UserDto(
-            user.Id,
-            user.FirstName,
-            user.LastName,
-            user.Email,
-            user.Role,
-            user.ManagerId
-        );
+   return user.ToDto();
     }
 }
