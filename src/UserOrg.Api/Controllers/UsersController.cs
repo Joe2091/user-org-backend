@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using UserOrg.BusinessLogic.Users.Commands;
 using UserOrg.BusinessLogic.Users.Dtos;
 using UserOrg.BusinessLogic.Users.Queries;
+using UserOrg.Api.Auth;
+
 
 namespace UserOrg.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[RequireFirebaseAuth]
 public class UsersController : ControllerBase
 {
     private readonly IMediator _mediator;

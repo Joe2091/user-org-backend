@@ -22,5 +22,9 @@ public class AppDbContext : DbContext
             .WithMany(u => u.DirectReports)
             .HasForeignKey(u => u.ManagerId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<User>()
+       .HasIndex(u => u.FirebaseUid)
+       .IsUnique();
     }
 }
